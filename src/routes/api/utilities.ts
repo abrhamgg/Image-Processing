@@ -1,9 +1,11 @@
 import { ReadStream } from 'fs';
+import { readFileSync } from 'fs';
 const fs = require('fs');
 const sharp = require('sharp');
 
 export function readImage(path:string): ReadStream {
   const readStream = fs.createReadStream(path);
+  const sync = fs.readFileSync(path);
   return readStream;
 }
 
@@ -26,12 +28,7 @@ export async function getMatadata(path: string): Promise<object> {
   return {};
 }
 
-export async function fileExists(
-  filename: string,
-  dir: string,
-  width?: string,
-  height?: string
-): Promise<number> {
+export async function fileExists(filename: string, dir: string, width?: string, height?: string): Promise<number> {
   /* fileExists - Function to check if an image file exists in given directory
   
        @filename: filename of the image to be searched
@@ -39,11 +36,16 @@ export async function fileExists(
        @height: height of the image in pixels
        Return: 0 -> if the file with the same height and width exist
                1 -> if the file exists but with different height or width
-              -1 -> if the file doesnot exist
+              -1 -> if the file does not exist
     */
-  const { readdir } = require('fs/promises');
-  const files = await readdir(dir);
-  for (const file of files) {
+  if (fs.existsSync(`images/thumb/${filename}`)) {
+    return 0;
+  } else {
+    return 1;
+  }
+  //const { readdir } = require('fs/promises');
+  //const files = await readdir(dir);
+  /*for (const file of files) {
     if (file == filename && (!width || !height)) {
       return 1;
     } else if (file == filename) {
@@ -57,15 +59,10 @@ export async function fileExists(
       }
       return 1;
     }
-  }
-  return -1;
+  }*/
 }
 
-export async function resizeImage(
-  filename: string,
-  width: string,
-  height: string
-): Promise<void> {
+export async function resizeImage(filename: string, width: string, height: string): Promise<void> {
   /**
    * resizeImage - function to resize a given image with specific height and width
    * @filename : image to be resized
@@ -82,7 +79,7 @@ export async function resizeImage(
         width: w,
         height: h,
       })
-      .toFile(`images/thumb/${filename}-thumb.jpg`);
+      .toFile(`images/thumb/${filename}-${width}-${height}.jpg`);
   } catch (error) {
     console.log(`resizing failed ${error}`);
   }

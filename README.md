@@ -35,7 +35,7 @@ npm i eslint
 ``` npm run start ```
 
 ### Usage
-```http://localhost/api/images?filename=image-name&height=300&width=300```
+``` http://localhost:3000/api/images?filename=fjord&width=500&height=500```
 
 - filename: is the name of image file in the images/full directory without extension.
 - height: height of the newly processed image.
