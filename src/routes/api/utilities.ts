@@ -2,7 +2,7 @@ import { ReadStream } from 'fs';
 const fs = require('fs');
 const sharp = require('sharp');
 
-export function readImage(path: string): ReadStream {
+export function readImage(path:string): ReadStream {
   const readStream = fs.createReadStream(path);
   return readStream;
 }

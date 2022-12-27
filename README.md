@@ -34,6 +34,13 @@ npm i eslint
 ### Running the server
 ``` npm run start ```
 
+### Usage
+```http://localhost/api/images?filename=image-name&height=300&width=300```
+
+- filename: is the name of image file in the images/full directory without extension.
+- height: height of the newly processed image.
+- width: width of the newly processed image.
+
 ### Compiling the project to javascript
 run ```npm run build ``` and a directory called dist will be created at the root of the project directory.
 

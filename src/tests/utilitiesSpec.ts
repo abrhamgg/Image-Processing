@@ -11,7 +11,7 @@ describe('Testing utility functions', () => {
     resizeImage('fjord', '400', '400');
     const flag = fileExists('fjord-thumb.jpg', 'images/thumb', '400', '400');
     flag.then((d) => {
-        expect(d).toEqual(0);
-    })
-  })
+      expect(d).toEqual(0);
+    });
+  });
 });
